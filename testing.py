@@ -53,7 +53,7 @@ while not done:
     screen.fill(WHITE)
 
     # --- Drawing code should go here
-    pygame.draw.rect(screen, RED, [100, 400, 25, 25])
+    pygame.draw.rect(screen, BLACK, [100, 400, 25, 25])
     text = font.render("Robot Location: " , True, BLACK)
     screen.blit(text, [10, 10])
 
