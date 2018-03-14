@@ -44,6 +44,7 @@ def main():
     # Used to manage how fast the screen updates
     clock = pygame.time.Clock()
 
+
     # Load and set up graphics.
     background_image = pygame.image.load("files/spaceshooter/Backgrounds/darkPurple_800.800.png").convert()
     player_image = pygame.image.load("files/spaceshooter/Backgrounds/playerShip1_blue_small.png").convert()
