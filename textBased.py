@@ -49,10 +49,29 @@ def main():
     adj = math.sqrt(powAx + powAy)
 
     turnA = format(math.degrees(math.acos( (fdest_x - fbot_x)/(adj ))), '.4f')
-    sTurnA = str(turnA)
-    print("turn " + sTurnA + " degrees.")
+    degrees = float(turnA)
+    print("turn " + turnA + " degrees.")
+    print(degrees)
+
+    while(1):
+        #Do you want to move the robot?
+        print("Do you want to move the robot 1 unit towards the destination?  y/n")
+        move = input("Please enter y or n: ")
+        if move == "y":
+            print("Moving robot")
+            #Calculate new robot x and y
+            newfbot_x = math.cos(math.radians(degrees))
+
+            #fbot_y += math.sin(degrees)
+            #move robot location
+            fbot_x += newfbot_x
 
 
+
+            #display the new robot x and y
+            bot_x = str(fbot_x)
+            bot_y = str(fbot_y)
+            print("Robot is at: " + bot_x + "," + bot_y)
 
 
 if __name__ == "__main__":
