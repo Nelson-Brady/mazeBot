@@ -42,6 +42,14 @@ done = False
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
 
+# Load and set up graphics.
+background_image = pygame.image.load("files/spaceshooter/Backgrounds/darkPurple.png").convert()
+player_image = pygame.image.load("files/spaceshooter/PNG/playerShip1_blue.png").convert()
+player_image.set_colorkey(BLACK)
+
+# Hide the mouse cursor
+pygame.mouse.set_visible(0)
+
 # -------- Main Program Loop -----------
 while not done:
     # --- Main event loop
@@ -58,7 +66,9 @@ while not done:
 
     # If you want a background image, replace this clear with blit'ing the
     # background image.
-    screen.fill(WHITE)
+    #screen.fill(WHITE)
+    screen.blit(background_image, [0, 0])
+
 
     # --- Drawing code should go here
     #Robot Rectangle

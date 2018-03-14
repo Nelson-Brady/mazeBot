@@ -19,7 +19,7 @@ BLACK = [0, 0, 0]
 WHITE = [255, 255, 255]
 
 # Set the height and width of the screen
-SIZE = [400, 400]
+SIZE = [800, 800]
 
 screen = pygame.display.set_mode(SIZE)
 pygame.display.set_caption("Snow Animation")
@@ -30,11 +30,20 @@ snow_list = []
 # Loop 50 times and add a snow flake in a random x,y position
 # This creates 50 randomly located snow flakes and puts them in snow_list
 for i in range(50):
-    x = random.randrange(0, 400)
-    y = random.randrange(0, 400)
+    x = random.randrange(0, 800)
+    y = random.randrange(0, 800)
     snow_list.append([x, y])
 
 clock = pygame.time.Clock()
+
+# Load and set up graphics.
+#background_image = pygame.image.load("saturn_family1.jpg").convert()
+player_image = pygame.image.load("files/spaceshooter/PNG/playerShip1_blue.png").convert()
+player_image.set_colorkey(BLACK)
+
+# Hide the mouse cursor
+pygame.mouse.set_visible(0)
+
 
 # Loop until the user clicks the close button.
 done = False
@@ -47,6 +56,12 @@ while not done:
     # Set the screen background
     screen.fill(BLACK)
 
+    # Get the current mouse position. This returns the position
+    # as a list of two numbers.
+    player_position = pygame.mouse.get_pos()
+    x = player_position[0]
+    y = player_position[1]
+
     # Process each snow flake in the list
     for i in range(len(snow_list)):
 
@@ -57,15 +72,16 @@ while not done:
         snow_list[i][1] += 1
 
         # If the snow flake has moved off the bottom of the screen
-        if snow_list[i][1] > 400:
+        if snow_list[i][1] > 800:
             # Reset it just above the top
             y = random.randrange(-50, -10)
             snow_list[i][1] = y
             # Give it a new x position
-            x = random.randrange(0, 400)
+            x = random.randrange(0, 800)
             snow_list[i][0] = x
 
     # Go ahead and update the screen with what we've drawn.
+    screen.blit(player_image, [x, y])
     pygame.display.flip()
     clock.tick(20)
 
