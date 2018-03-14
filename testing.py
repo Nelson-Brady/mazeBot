@@ -17,6 +17,9 @@ WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 
+#def displayLocation():
+
+
 def main():
     """ Main function for the game. """
     pygame.init()
@@ -33,10 +36,11 @@ def main():
     # Starting position of the bot
     bot_x = 50
     bot_y = 710
+    #bot_direction = "right"
 
     # Speed and direction of bot
-    bot_change_x = 5
-    bot_change_y = 5
+    #bot_change_x = 0
+    #bot_change_y = 0
 
     # Loop until the user clicks the close button.
     done = False
@@ -49,6 +53,7 @@ def main():
     background_image = pygame.image.load("files/spaceshooter/Backgrounds/darkPurple_800.800.png").convert()
     player_image = pygame.image.load("files/spaceshooter/Backgrounds/playerShip1_blue_small.png").convert()
     player_image.set_colorkey(WHITE)
+    rot_bot = player_image
 
     # Hide the mouse cursor
     pygame.mouse.set_visible(0)
@@ -59,10 +64,35 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
+
+            # User pressed down on a key
+            elif event.type == pygame.KEYDOWN:
+                # Figure out if it was an arrow key. If so
+                # adjust speed.
+                if event.key == pygame.K_LEFT:
+                    bot_x += -3
+                elif event.key == pygame.K_RIGHT:
+                    bot_x += 3
+                elif event.key == pygame.K_UP:
+                    bot_y += -3
+                elif event.key == pygame.K_DOWN:
+                    bot_y += 3
+
+            # User let up on a key
+            elif event.type == pygame.KEYUP:
+               # If it is an arrow key, reset vector back to zero
+                if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                    x_speed = 0
+                elif event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                    y_speed = 0
+
+            # Mouse
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                pygame.transform.rotate()
+                rot_bot = pygame.transform.rotate(rot_bot,5)
+
 
         # --- Game logic should go here
+        #mydata = input('Prompt :')
 
         # --- Screen-clearing code goes here
 
@@ -84,7 +114,7 @@ def main():
         #Rotating the scree:
         #pygame.transform.rotate()
         #rotate(Surface, angle) -> Surface
-        screen.blit(player_image, [bot_x, bot_y])
+        screen.blit(rot_bot, [bot_x, bot_y])
 
         # --- Drawing code should go here
         #Robot Rectangle
@@ -94,8 +124,8 @@ def main():
         #rect_x += rect_change_x
         #rect_y += rect_change_y
 
-        text = font.render("Robot Location: " , True, BLACK)
-        screen.blit(text, [10, 10])
+        botLocation = font.render("Robot Location: " , True, BLACK)
+        screen.blit(botLocation, [10, 10])
 
         # Border of active grid
         pygame.draw.line(screen, BLACK, [50, 50], [750, 50], 2)
