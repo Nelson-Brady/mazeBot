@@ -26,7 +26,15 @@ font = pygame.font.SysFont('Calibri', 25, True, False)
 size = (800, 800)
 screen = pygame.display.set_mode(size)
 
-pygame.display.set_caption("My Game")
+pygame.display.set_caption("Robot Testing")
+
+# Starting position of the rectangle
+rect_x = 50
+rect_y = 725
+
+# Speed and direction of rectangle
+rect_change_x = 5
+rect_change_y = 5
 
 # Loop until the user clicks the close button.
 done = False
@@ -53,7 +61,13 @@ while not done:
     screen.fill(WHITE)
 
     # --- Drawing code should go here
-    pygame.draw.rect(screen, BLACK, [100, 400, 25, 25])
+    #Robot Rectangle
+    pygame.draw.rect(screen, BLACK, [rect_x, rect_y, 25, 25])
+    #Moving of Robot
+    # Move the rectangle starting point
+    rect_x += rect_change_x
+    rect_y += rect_change_y
+
     text = font.render("Robot Location: " , True, BLACK)
     screen.blit(text, [10, 10])
 
