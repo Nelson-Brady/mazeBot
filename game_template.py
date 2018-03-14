@@ -1,29 +1,41 @@
 """
- Pygame base template for opening a window
+Pygame base template for opening a window, done with functions
 
  Sample Python/Pygame Programs
  Simpson College Computer Science
  http://programarcadegames.com/
  http://simpson.edu/computer-science/
 
- Explanation video: http://youtu.be/vRB_983kUMc
 """
 
 import pygame
 
-# Define some colors
+# The use of the main function is described in Chapter 9.
+
+# Define some colors as global constants
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 
-pygame.init()
+
+
+# Select the font to use, size, bold, italics
+font = pygame.font.SysFont('Calibri', 25, True, False)
 
 # Set the width and height of the screen [width, height]
-size = (700, 500)
+size = (800, 800)
 screen = pygame.display.set_mode(size)
 
-pygame.display.set_caption("My Game")
+pygame.display.set_caption("Robot Testing")
+
+# Starting position of the bot
+bot_x = 50
+bot_y = 710
+
+# Speed and direction of bot
+bot_change_x = 5
+bot_change_y = 5
 
 # Loop until the user clicks the close button.
 done = False
@@ -31,31 +43,61 @@ done = False
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
 
-# -------- Main Program Loop -----------
-while not done:
-    # --- Main event loop
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            done = True
+# Load and set up graphics.
+background_image = pygame.image.load("files/spaceshooter/Backgrounds/darkPurple_800.800.png").convert()
+player_image = pygame.image.load("files/spaceshooter/Backgrounds/playerShip1_blue_small.png").convert()
+player_image.set_colorkey(WHITE)
 
-    # --- Game logic should go here
+# Hide the mouse cursor
+pygame.mouse.set_visible(0)
 
-    # --- Screen-clearing code goes here
 
-    # Here, we clear the screen to white. Don't put other drawing commands
-    # above this, or they will be erased with this command.
+def main():
+    """ Main function for the game. """
+    pygame.init()
 
-    # If you want a background image, replace this clear with blit'ing the
-    # background image.
-    screen.fill(WHITE)
+    # Set the width and height of the screen [width,height]
+    size = [700, 500]
+    screen = pygame.display.set_mode(size)
 
-    # --- Drawing code should go here
+    pygame.display.set_caption("My Game")
 
-    # --- Go ahead and update the screen with what we've drawn.
-    pygame.display.flip()
+    # Loop until the user clicks the close button.
+    done = False
 
-    # --- Limit to 60 frames per second
-    clock.tick(60)
+    # Used to manage how fast the screen updates
+    clock = pygame.time.Clock()
 
-# Close the window and quit.
-pygame.quit()
+    # -------- Main Program Loop -----------
+    while not done:
+        # ALL EVENT PROCESSING SHOULD GO BELOW THIS COMMENT
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                done = True
+        # ALL EVENT PROCESSING SHOULD GO ABOVE THIS COMMENT
+
+        # ALL GAME LOGIC SHOULD GO BELOW THIS COMMENT
+
+        # ALL GAME LOGIC SHOULD GO ABOVE THIS COMMENT
+
+        # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT
+
+        # First, clear the screen to white. Don't put other drawing commands
+        # above this, or they will be erased with this command.
+        screen.fill(WHITE)
+
+        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
+
+        # Go ahead and update the screen with what we've drawn.
+        pygame.display.flip()
+
+        # Limit to 60 frames per second
+        clock.tick(60)
+
+    # Close the window and quit.
+    # If you forget this line, the program will 'hang'
+    # on exit if running from IDLE.
+    pygame.quit()
+
+if __name__ == "__main__":
+    main()
